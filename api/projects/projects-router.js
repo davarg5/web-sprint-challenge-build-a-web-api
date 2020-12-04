@@ -1,7 +1,6 @@
 // Write your "projects" router here!
 const express = require('express');
-const router = require('../actions/actions-router');
-const server = express();
+const router = express.Router();
 const Project = require('./projects-model');
 
 router.get('/', (req, res) => {
