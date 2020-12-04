@@ -20,7 +20,9 @@ router.get('/:id', (req, res) => {
             if(!action) {
                 res.status(404).json({ message: 'There is no action with that id' })
             }
-            res.status(200).json(action);
+            else{ 
+                res.status(200).json(action); 
+            }
         })
         .catch(() => {
             res.status(500).json({ message: 'Error retrieving the action' })
@@ -38,7 +40,9 @@ router.post('/', (req, res) => {
             if(!action) {
                 res.status(404).json({ message: 'There are no projects with that id' })
             }
-            res.status(201).json(action);
+            else{ 
+                res.status(201).json(action);
+            }
         })
         .catch(() => {
             res.status(500).json({ message: 'Error creating the action and/or the project_id is not valid' })
@@ -55,7 +59,9 @@ router.put('/:id', (req, res) => {
             if(!action) {
                 res.status(404).json({ message: 'There are no actions with that id' })
             }
-            res.status(200).json(action);
+            else {
+                res.status(200).json(action);
+            }
         })
         .catch(() => {
             res.status(500).json({ message: 'Error updating the action' })
@@ -69,7 +75,9 @@ router.delete('/:id', (req, res) => {
             if(!action) {
                 res.status(404).json({ message: 'There are no actions with that id'})
             }
-            res.status(204);
+            else {
+                res.status(204);
+            }
         })
         .catch(() => {
             res.status(500).json({ message: 'Error deleting the action' })

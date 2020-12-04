@@ -20,7 +20,9 @@ router.get('/:id', (req, res) => {
             if(!project) {
                 res.status(404).json({ message: 'There are no projects with that id' })
             }
-            res.status(200).json(project);
+            else {
+                res.status(200).json(project);
+            }
         })
         .catch(() => {
             res.status(500).json({ message: 'Error retrieving the project' })
@@ -51,7 +53,9 @@ router.put('/:id', (req, res) => {
             if(!project) {
                 res.status(404).json({ message: 'There are no projects with that id'})
             }
-            res.status(200).json(project);
+            else {
+                res.status(200).json(project);
+            }
         })
         .catch(() => {
             res.status(500).json({ message: 'Error updating the project' })
@@ -65,11 +69,15 @@ router.delete('/:id', (req, res) => {
             if(!project) {
                 res.status(404).json({ message: 'There are no projects with that id'})
             }
-            res.status(204);
+            else {
+                res.status(204);
+            }
         })
         .catch(() => {
             res.status(500).json({ message: 'Error deleting the project' })
         })
 })
+
+
 
 module.exports = router;
