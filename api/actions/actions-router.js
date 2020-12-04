@@ -39,12 +39,13 @@ router.post('/', (req, res) => {
             res.status(201).json(action);
         })
         .catch(() => {
-            res.status(500).json({ message: 'Error creating the action' })
+            res.status(500).json({ message: 'Error creating the action and/or the project_id is not valid' })
         })
 })
 
-router.put('/', (req, res) => {
-    Action.update(req.body.project_id, req.body)
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    Action.update(id, req.body)
         .then(action => {
             if(!action) {
                 res.status(404).json({ message: 'There are no projects with that id' })
@@ -56,11 +57,10 @@ router.put('/', (req, res) => {
         })
 })
 
-router.delete('/', (req, res) => {
-
-    Action.remove()
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+    Action.remove(id)
         .then(() => {
-
             res.status(204);
         })
         .catch(() => {
