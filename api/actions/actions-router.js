@@ -30,7 +30,9 @@ router.get('/:id', (req, res) => {
 
 // Start fixing here
 router.post('/', (req, res) => {
-
+    if(!req.body.project_id || !req.body.description || !req.body.notes) {
+        res.status(400).json({ message: 'Action must have a project id, description, and notes' });
+    }
     Action.insert(req.body)
         .then(action => {
             if(!action) {
@@ -44,11 +46,14 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+    if(!req.body) {
+        res.status(400).json({ message: 'Action must be provided' });
+    }
     const { id } = req.params;
     Action.update(id, req.body)
         .then(action => {
             if(!action) {
-                res.status(404).json({ message: 'There are no projects with that id' })
+                res.status(404).json({ message: 'There are no actions with that id' })
             }
             res.status(200).json(action);
         })
@@ -60,7 +65,10 @@ router.put('/:id', (req, res) => {
 router.delete('/:id', (req, res) => {
     const { id } = req.params;
     Action.remove(id)
-        .then(() => {
+        .then(action => {
+            if(!action) {
+                res.status(404).json({ message: 'There are no actions with that id'})
+            }
             res.status(204);
         })
         .catch(() => {
