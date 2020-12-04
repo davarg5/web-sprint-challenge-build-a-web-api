@@ -52,8 +52,8 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    if(!req.body) {
-        res.status(400).json({ message: 'Action must be provided' });
+    if(!req.body.project_id && !req.body.description && !req.body.notes) {
+        res.status(400).json({ message: 'Missing all action fields' });
     }
     else {
         const { id } = req.params;
@@ -76,11 +76,12 @@ router.delete('/:id', (req, res) => {
     const { id } = req.params;
     Action.remove(id)
         .then(action => {
+            console.log(action);
             if(!action) {
                 res.status(404).json({ message: 'There are no actions with that id'})
             }
             else {
-                res.status(204);
+                res.status(204).json({});
             }
         })
         .catch(() => {

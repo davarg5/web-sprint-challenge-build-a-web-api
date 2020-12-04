@@ -9,8 +9,8 @@ server.use(express.json());
 const ActionRouter = require('./actions/actions-router');
 server.use('/api/actions', ActionRouter);
 
-// const ProjectRouter = require('./projects/projects-router');
-// server.use('/api/projects', ProjectRouter);
+const ProjectRouter = require('./projects/projects-router');
+server.use('/api/projects', ProjectRouter);
 
 server.get('/', (req, res) => {
     res.send(`<h2>Welcome to the Posts and Actions API</h2>`)

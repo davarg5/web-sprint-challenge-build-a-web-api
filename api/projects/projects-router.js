@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-    if(!req.body) {
+    if(!req.body.name && !req.body.description) {
         res.status(400).json({ message: 'Project must be provided'})
     }
     else {
@@ -64,20 +64,6 @@ router.put('/:id', (req, res) => {
             res.status(500).json({ message: 'Error updating the project' })
         })
     }
-    const { id } = req.params;
-    const changes = req.body;
-    Project.update(id, changes)
-        .then(project => {
-            if(!project) {
-                res.status(404).json({ message: 'There are no projects with that id'})
-            }
-            else {
-                res.status(200).json(project);
-            }
-        })
-        .catch(() => {
-            res.status(500).json({ message: 'Error updating the project' })
-        })
 })
 
 router.delete('/:id', (req, res) => {
@@ -88,7 +74,7 @@ router.delete('/:id', (req, res) => {
                 res.status(404).json({ message: 'There are no projects with that id'})
             }
             else {
-                res.status(204);
+                res.status(204).json({});
             }
         })
         .catch(() => {
